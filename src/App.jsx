@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { PresentCard } from "./components/Card";
-import { UserPanel } from "./components/UserPanel";
+import { PresentCard } from "./components/Card.jsx";
+import { UserPanel } from "./components/UserPanel.jsx";
 
 function App() {
   const [repos, setRepos] = useState([]);
