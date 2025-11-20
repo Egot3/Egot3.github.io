@@ -1,26 +1,32 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios, { Axios } from 'axios';
+import axios from 'axios';
+import { PresentCard } from './components/Card'
+import { UserPanel } from './components/UserPanel';
 
 function App() {
   const [repos, setRepos] = useState([])
+  const [generalInfo, setGeneralInfo] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   const githubUsername = 'Egot3'
-  const apiUrl = `https://api.github.com/users/${githubUsername}/repos`
+  const repoUrl = `https://api.github.com/users/${githubUsername}/repos`
+  const userUrl = `https://api.github.com/users/${githubUsername}`
 
   useEffect(()=>{
     const pullRepos = async () => {
     try{
-      const response = await axios.get(apiUrl)
-      
-      console.log(response)
+      const repoResponse = await axios.get(repoUrl)
+      const userResponse = await axios.get(userUrl)
+
+      setGeneralInfo(userResponse.data)
+      setRepos(repoResponse.data)
     }
 
     catch(err){
-      setLoading(err.message)
+      setError(err.message)
     }
 
     finally{
@@ -28,11 +34,14 @@ function App() {
     }
   }
   pullRepos()
-  }, apiUrl)
+  }, [0])
+
+  console.log(repos)
+  console.log(generalInfo)
 
   return (
     <>
-
+      <UserPanel username={generalInfo['login']} avatar={generalInfo['avatar_url']} dateOfCreation={generalInfo['created_at']} link={generalInfo['html_url']}></UserPanel>
     </>
   )
 }
