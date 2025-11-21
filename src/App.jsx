@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import "./assets/_variables.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-// import { PresentCard } from "./components/Card.jsx";
+import { PresentCard } from "./components/Card.jsx";
 import { UserPanel } from "./components/UserPanel.jsx";
+import { Row } from "react-bootstrap";
 
 function App() {
   const [repos, setRepos] = useState([]);
@@ -32,8 +34,8 @@ function App() {
     pullRepos();
   }, []);
 
-  console.log(repos);
-  console.log(generalInfo);
+  //console.log(repos);
+  // console.log(generalInfo);
 
   return (
     <>
@@ -43,6 +45,23 @@ function App() {
         dateOfCreation={generalInfo["created_at"]}
         link={generalInfo["html_url"]}
       ></UserPanel>
+      
+      <hr></hr>
+
+      <Row className="g-4">
+      {repos.map((repo) => {
+        console.log("entered ", repo["name"]);
+        return (
+          <PresentCard
+            key={repo["id"]}
+            repoName={repo["name"]}
+            starCount={repo["stargazers_count"]}
+            description={repo["description"]}
+            link={repo["html_url"]}
+          ></PresentCard>
+        );
+      })}
+      </Row>
     </>
   );
 }

@@ -1,0 +1,24 @@
+@import "variables.scss";
+
+.skeleton{
+    width: 20%;
+    height: 35%;
+    border-radius: 1rem;
+    display: inline-block;
+    pointer-events: none;
+
+    background-color: $secondaryBackgroundColor;  //unholy construct
+    background-image: linear-gradient(
+        90deg,
+        $secondaryBackgroundColor 0%,
+        $successColor 50%,
+        $secondaryBackgroundColor 100%,
+    );
+    background-size: 200% 100%;
+    animation: boning 2s infinite;
+}
+
+@keyframes boning {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}

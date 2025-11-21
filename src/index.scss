@@ -1,3 +1,5 @@
+@import '/src/assets/variables.scss';
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -65,4 +67,19 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.primaryText{
+    color: $primaryTextColor !important;
+}
+.secondaryText{
+    color: $secondaryTextColor !important;
+}
+
+
+.primaryBg{
+    background-color: $primaryBackgroundColor !important;
+}
+.secondaryBg{
+    background-color: $secondaryBackgroundColor !important;
 }
